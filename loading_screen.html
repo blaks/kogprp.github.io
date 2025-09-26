@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Loading Screen</title>
+    <style>
+        /* Supprimer marges */
+        html, body {
+            height: 100%;
+            margin: 0;
+            font-family: Montserrat SemiBold, sans-serif;
+            color: white;
+            background: url("background.png") no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        /* Conteneur central */
+        .center-box {
+            background: rgba(0, 0, 0, 0);
+            padding: 40px;
+            border-radius: 15px;
+        }
+
+        h1 {
+            font-size: 60px;
+            margin-bottom: 5px;
+            color: #FFFFFF;
+        }
+
+        h2 {
+            font-size: 20px;
+            font-weight: normal;
+            margin-bottom: 50px;
+        }
+
+        .orange {
+            color: #F59B14;
+        }
+
+        /* Loader rond */
+        .loader {
+            border: 8px solid rgba(255,255,255,0.2);
+            border-top: 8px solid #F59B14;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 20px auto;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Texte de statut */
+        #loading {
+            margin-top: 50px;
+            font-size: 16px;
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <div class="center-box">
+        <h1><span class="orange">KOG Serv</span>: PrisonRP</h1>
+        <h2>Chargment...</h2>
+        <div class="loader"></div>
+        <div id="loading">Connexion au serveur...</div>
+
+    <script>
+        // Remplacer le texte du status en fonction de GMod
+        window.SetStatusChanged = function(status) {
+            document.getElementById('loading').innerText = status;
+        };
+
+        // Exemple: fichiers en cours de DL
+        window.DownloadingFile = function(fileName) {
+            document.getElementById('loading').innerText = "Téléchargement : " + fileName;
+        };
+
+        window.SetFilesTotal = function(total) {
+            document.getElementById('loading').innerText = "Nombre de fichiers : " + total;
+        };
+
+        window.SetFilesNeeded = function(needed) {
+            document.getElementById('loading').innerText = "Restant : " + needed + " fichiers";
+        };
+    </script>
+</body>
+</html>
